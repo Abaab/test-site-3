@@ -17,8 +17,8 @@ jobs:
       # Add the original repository as an upstream remote
       - name: Add upstream remote
         run: |
-          git remote add upstream https://github.com/Rachmanin0xFF/docs-to-pages.git || echo "Upstream already exists"
-          git fetch upstream
+          git remote add template https://github.com/Rachmanin0xFF/docs-to-pages.git || echo "Upstream already exists"
+          git fetch --all
 
       - name: Set up merge
         run: |
