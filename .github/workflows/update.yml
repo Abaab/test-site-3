@@ -29,7 +29,7 @@ jobs:
         run: |
           git config --global user.name '${{ github.actor }} - Automated'
           git config --global user.email '${{ github.actor }}@users.noreply.github.com'
-          git merge upstream/main --allow-unrelated-histories -m "Merge updates from template"
+          git merge template/main --allow-unrelated-histories -m "Merge updates from template"
       
       - name: Commit resolved changes
         run: |
