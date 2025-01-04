@@ -36,7 +36,7 @@ jobs:
         run: |
           git remote add template https://github.com/Rachmanin0xFF/docs-to-pages.git || echo "Upstream already exists"
           git fetch template
-          git reset template/main -- . ':!.github/workflows'
+          git reset template/main -- . ':!.github/workflows/update.yml'
           git config --global user.name '${{ github.actor }} - Automated'
           git config --global user.email '${{ github.actor }}@users.noreply.github.com'
           git commit -m "Reset excluding workflows"
