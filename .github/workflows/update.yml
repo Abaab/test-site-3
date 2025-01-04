@@ -43,6 +43,9 @@ jobs:
         
       - name: Temporarily commit blanked repo
         run: |
+          git rm CONFIG.ini
+          git rm LINK_TO_DRIVE_FOLDER
+          git rm templates
           git commit -m "Temporary pre-merge commit" || echo "No changes to commit"
 
       - name: Merge updates
