@@ -36,7 +36,7 @@ jobs:
         run: |
           git remote add template https://github.com/Rachmanin0xFF/docs-to-pages.git || echo "Upstream already exists"
           git fetch template
-          git reset --hard template/main -- . ':!.github/workflows'
+          git reset template/main -- . ':!.github/workflows'
           git commit -m "Reset excluding workflows"
           git push --force origin main
 
