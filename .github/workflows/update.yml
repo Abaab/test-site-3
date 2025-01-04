@@ -13,12 +13,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: refs/heads/main
 
       # Add the original repository as an upstream remote
       - name: Add upstream remote
         run: |
           git remote add template https://github.com/Rachmanin0xFF/docs-to-pages.git || echo "Upstream already exists"
-          git fetch --all
+          git fetch origin
+          git fetch template
 
       - name: Set up merge
         run: |
