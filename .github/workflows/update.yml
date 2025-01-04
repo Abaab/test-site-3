@@ -37,6 +37,11 @@ jobs:
           mv CONFIG.ini /tmp/config_backup/CONFIG.ini
           mv LINK_TO_DRIVE_FOLDER /tmp/config_backup/LINK_TO_DRIVE_FOLDER
           mv templates /tmp/config_backup/templates
+          ls -l
+        
+      - name: Temporarily commit blanked repo
+        run: |
+          git commit -m "Temporary pre-merge commit" || echo "No changes to commit"
 
       - name: Merge updates
         run: |
