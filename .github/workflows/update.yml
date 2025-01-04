@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  actions: write
 
 jobs:
   update-repo:
@@ -33,11 +32,14 @@ jobs:
           mv templates /tmp/config_backup/templates
           ls -l
 
+      # We can't update workflow files without a PAT, so we have to exclude those :/
+      # This workflow is just for updating the .py file, really...
+      # (and anything else I add that isn't a workflow)
       - name: Destroy everything
         run: |
           git remote add template https://github.com/Rachmanin0xFF/docs-to-pages.git || echo "Upstream already exists"
           git fetch template
-          git reset template/main -- . ':!.github/workflows/update.yml'
+          git reset template/main -- . ':!.github/workflows'
           git config --global user.name '${{ github.actor }} - Automated'
           git config --global user.email '${{ github.actor }}@users.noreply.github.com'
           git commit -m "Reset excluding workflows"
