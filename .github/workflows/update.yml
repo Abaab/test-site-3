@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  action: write
 
 jobs:
   update-repo:
