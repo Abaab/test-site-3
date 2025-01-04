@@ -1,6 +1,8 @@
 name: Update Website Builder
 
 on:
+  schedule:
+    - cron: '0 0 * * 0'
   workflow_dispatch:
 
 permissions:
@@ -13,6 +15,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        # This next bit is necessary (otherwise we get issues when we merge)
         with:
           fetch-depth: 0
           ref: refs/heads/main
@@ -24,10 +27,15 @@ jobs:
           git fetch origin
           git fetch template
 
-      - name: Set up merge
+      # Templates don't update, but the script that uses them should be backwards-compatible
+      - name: Protect local files
         run: |
           git checkout --ours LINK_TO_DRIVE_FOLDER
+          git checkout --ours CONFIG.ini
+          git checkout --ours templates
           git add LINK_TO_DRIVE_FOLDER
+          git add CONFIG.ini
+          git add templates
 
       - name: Merge updates
         run: |
@@ -37,7 +45,7 @@ jobs:
       
       - name: Commit resolved changes
         run: |
-          git commit -m "Automatic update" || echo "No changes to commit"
+          git commit -m "Routine " || echo "No changes to commit"
       
       - name: Push changes
         run: |
