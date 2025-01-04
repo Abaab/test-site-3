@@ -23,6 +23,8 @@ jobs:
       # Add the original repository as an upstream remote
       - name: Add upstream remote
         run: |
+          git config --global user.name '${{ github.actor }} - Automated'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
           git remote add template https://github.com/Rachmanin0xFF/docs-to-pages.git || echo "Upstream already exists"
           git fetch origin
           git fetch template
@@ -45,8 +47,6 @@ jobs:
 
       - name: Merge updates
         run: |
-          git config --global user.name '${{ github.actor }} - Automated'
-          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
           git merge template/main --allow-unrelated-histories -m "Automated update merge"
 
       - name: Recover user files
